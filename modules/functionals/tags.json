@@ -1,0 +1,35 @@
+{
+    "tags": [
+        {
+            "basic check": [
+                "help",
+                "question",
+                "support",
+                "not work",
+                "doesn't work",
+                "broke",
+                "request",
+                "stuck",
+                "robot",
+                "dear",
+                "concerning",
+                "bugland",
+                "bug"
+
+            ]
+        },
+        {
+            "window cleaner robot": [
+                "window",
+                "glass",
+                "suction",
+                ""
+            ]
+        },
+        {
+            "vaccume robot" : [
+                "vaccume"
+            ]
+        }
+    ]
+}
