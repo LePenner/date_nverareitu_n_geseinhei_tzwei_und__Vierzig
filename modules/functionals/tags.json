@@ -8,6 +8,8 @@
                 "not work",
                 "doesn't work",
                 "broke",
+                "broken",
+                "brake",
                 "request",
                 "stuck",
                 "robot",
@@ -22,13 +24,23 @@
             "window cleaner robot": [
                 "window",
                 "glass",
-                "suction",
-                ""
+                "suction"
             ]
         },
         {
-            "vaccume robot" : [
-                "vaccume"
+            "vaccum robot" : [
+                "vaccum",
+                "dust",
+                "dirt"
+            ]
+        },
+        {
+            "physical problem" : [
+                "cable",
+                "power",
+                "light",
+                "lights",
+                "loose"
             ]
         }
     ]
