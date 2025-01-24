@@ -1,0 +1,79 @@
+{
+    "inputs": [
+        {
+            "text": "Hi, my robot is not working anymore. Can you help?",
+            "tags": [
+                "basic check"
+            ]
+        },
+        {
+            "text": "Hello, my window cleaner leaves streaks on the glass. What can I do?",
+            "tags": [
+                "basic check",
+                "window cleaner robot"
+            ]
+        },
+        {
+            "text": "Hey, my vacuum robot is stuck under the sofa and won't move.",
+            "tags": [
+                "basic check",
+                "vaccum robot"
+            ]
+        },
+        {
+            "text": "Dear support, my robot's battery doesn't last as long as it used to. Is it replaceable?",
+            "tags": [
+                "basic check",
+                "battery issue"
+            ]
+        },
+        {
+            "text": "Hello, my window robot's suction is not strong enough to stay on the glass.",
+            "tags": [
+                "basic check",
+                "window cleaner robot",
+                "physical problem"
+            ]
+        },
+        {
+            "text": "Hi, the app for my vacuum robot keeps crashing. Can you fix this?",
+            "tags": [
+                "basic check",
+                "vaccum robot",
+                "software issue"
+            ]
+        },
+        {
+            "text": "Good evening, my vacuum robot isn’t docking properly with the charging station.",
+            "tags": [
+                "basic check",
+                "vaccum robot",
+                "physical problem"
+            ]
+        },
+        {
+            "text": "Hey, I need a replacement for the cleaning pads on my window cleaner robot.",
+            "tags": [
+                "basic check",
+                "window cleaner robot",
+                "accessories and parts"
+            ]
+        },
+        {
+            "text": "Hi, my robot's sensor seems to be malfunctioning, and it keeps bumping into walls.",
+            "tags": [
+                "basic check",
+                "physical problem",
+                "software issue"
+            ]
+        },
+        {
+            "text": "Hello, how do I clean the filter in my vacuum robot?",
+            "tags": [
+                "basic check",
+                "vaccum robot",
+                "accessories and parts"
+            ]
+        }
+    ]
+}

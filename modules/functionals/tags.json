@@ -2,10 +2,17 @@
     "tags": [
         {
             "basic check": [
+                "hi",
+                "hello",
+                "greetings",
+                "good morning",
+                "good evening",
+                "hey",
                 "help",
                 "question",
                 "support",
                 "not work",
+                "problem",
                 "doesn't work",
                 "broke",
                 "broken",
@@ -16,31 +23,118 @@
                 "dear",
                 "concerning",
                 "bugland",
-                "bug"
-
+                "bug",
+                "issue",
+                "trouble",
+                "error",
+                "malfunction",
+                "fix"
             ]
         },
         {
             "window cleaner robot": [
                 "window",
+                "windows",
                 "glass",
-                "suction"
+                "suction",
+                "wipe",
+                "streak",
+                "cleaner",
+                "smudge",
+                "water tank",
+                "pads"
             ]
         },
         {
-            "vaccum robot" : [
+            "vaccum robot": [
                 "vaccum",
+                "vacuum",
+                "vacume",
+                "vaccume",
+                "vacuume",
                 "dust",
-                "dirt"
+                "dirt",
+                "carpet",
+                "floor",
+                "bin",
+                "filter",
+                "suction power",
+                "brush",
+                "wheels"
             ]
         },
         {
-            "physical problem" : [
+            "physical problem": [
                 "cable",
                 "power",
                 "light",
                 "lights",
-                "loose"
+                "loose",
+                "button",
+                "sensor",
+                "cover",
+                "crack",
+                "damaged",
+                "hardware",
+                "dock",
+                "charging station"
+            ]
+        },
+        {
+            "battery issue": [
+                "battery",
+                "charge",
+                "low battery",
+                "runtime",
+                "power failure",
+                "doesn't charge",
+                "battery replacement"
+            ]
+        },
+        {
+            "software issue": [
+                "update",
+                "firmware",
+                "app",
+                "connection",
+                "wifi",
+                "bluetooth",
+                "error code",
+                "error",
+                "reset",
+                "calibrate",
+                "software bug",
+                "settings",
+                "mapping",
+                "route",
+                "navigation"
+            ]
+        },
+        {
+            "accessories and parts": [
+                "accessory",
+                "replacement",
+                "part",
+                "spare",
+                "batteries",
+                "brush",
+                "filter",
+                "pad",
+                "water tank",
+                "dustbin",
+                "replacement part"
+            ]
+        },
+        {
+            "maintenance": [
+                "maintenance",
+                "service",
+                "repair",
+                "warranty",
+                "troubleshooting",
+                "manual",
+                "guide",
+                "instructions"
             ]
         }
     ]
