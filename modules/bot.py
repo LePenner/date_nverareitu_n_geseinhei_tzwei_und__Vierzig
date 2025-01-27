@@ -14,7 +14,7 @@ class Bot():
 
         translator = str.maketrans('', '', string.punctuation) # translation key
 
-        q_striped = question.translate(translator) # remove punktuation from string
+        q_striped = question.translate(translator) # remove punctuation from string
         q_list = q_striped.lower().split()
 
         with open('modules/functionals/tags.json', 'r') as json_file:
