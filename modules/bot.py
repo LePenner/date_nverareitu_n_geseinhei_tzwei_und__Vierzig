@@ -34,7 +34,7 @@ class Bot():
             q_tags = []
 
             # excess keywords from json file and get tags of matching words from user question
-            for tag in json_tag_data["tags"]:
+            for tag in json_tag_data['tags']:
                 for values in tag.values():
                     for word in q_list:
                         if word in values:

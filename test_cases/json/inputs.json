@@ -74,6 +74,123 @@
                 "vaccum robot",
                 "accessories and parts"
             ]
+        },
+        {
+            "text": "Good morning, my vacuum robot's brush is tangled with hair and won't rotate.",
+            "tags": [
+                "basic check",
+                "vaccum robot",
+                "physical problem"
+            ]
+        },
+        {
+            "text": "Hi, the water tank in my window robot is leaking. How do I replace it?",
+            "tags": [
+                "basic check",
+                "window cleaner robot",
+                "accessories and parts"
+            ]
+        },
+        {
+            "text": "Hello, my robot shows error code E3 after the latest firmware update.",
+            "tags": [
+                "basic check",
+                "software issue"
+            ]
+        },
+        {
+            "text": "The wheels on my vacuum robot are making grinding noises on carpets.",
+            "tags": [
+                "basic check",
+                "vaccum robot",
+                "physical problem"
+            ]
+        },
+        {
+            "text": "Greetings! My robot's wifi connection drops every 10 minutes during cleaning.",
+            "tags": [
+                "basic check",
+                "software issue"
+            ]
+        },
+        {
+            "text": "Help! My window robot left a crack in the glass. What should I do?",
+            "tags": [
+                "basic check",
+                "window cleaner robot",
+                "physical problem"
+            ]
+        },
+        {
+            "text": "Dear Bugland, where can I find the troubleshooting guide for battery calibration?",
+            "tags": [
+                "basic check",
+                "battery issue",
+                "maintenance"
+            ]
+        },
+        {
+            "text": "Good evening, my vacuum's dustbin sensor says it's full when it's empty.",
+            "tags": [
+                "basic check",
+                "vaccum robot",
+                "software issue"
+            ]
+        },
+        {
+            "text": "The replacement filter I ordered doesn't fit my vacuum model. Can you assist?",
+            "tags": [
+                "basic check",
+                "accessories and parts",
+                "vaccum robot"
+            ]
+        },
+        {
+            "text": "Hey, my robot keeps trying to vacuum wet floors despite the 'no mop' setting.",
+            "tags": [
+                "basic check",
+                "software issue",
+                "vaccum robot"
+            ]
+        },
+        {
+            "text": "Hello, the navigation system keeps mapping my living room as a wall.",
+            "tags": [
+                "basic check",
+                "software issue",
+                "vaccum robot"
+            ]
+        },
+        {
+            "text": "Hi, my window robot's pads leave smudges even after replacement.",
+            "tags": [
+                "basic check",
+                "window cleaner robot",
+                "accessories and parts"
+            ]
+        },
+        {
+            "text": "The power button on my charging station is unresponsive. Hardware issue?",
+            "tags": [
+                "basic check",
+                "physical problem",
+                "battery issue"
+            ]
+        },
+        {
+            "text": "Greetings, how often should I service my robot under warranty?",
+            "tags": [
+                "basic check",
+                "maintenance"
+            ]
+        },
+        {
+            "text": "Help! My vacuum robot ate a USB cable and now won't move.",
+            "tags": [
+                "basic check",
+                "vaccum robot",
+                "physical problem"
+            ]
         }
     ]
 }

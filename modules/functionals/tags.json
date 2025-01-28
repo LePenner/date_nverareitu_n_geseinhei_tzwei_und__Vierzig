@@ -20,6 +20,7 @@
                 "request",
                 "stuck",
                 "robot",
+                "robots",
                 "dear",
                 "concerning",
                 "bugland",
@@ -28,7 +29,12 @@
                 "trouble",
                 "error",
                 "malfunction",
-                "fix"
+                "fix",
+                "morning",
+                "mornin",
+                "doesnt",
+                "good",
+                "evening"
             ]
         },
         {
@@ -51,6 +57,11 @@
                 "vacume",
                 "vaccume",
                 "vacuume",
+                "vaccums",
+                "vacuums",
+                "vacumes",
+                "vaccumes",
+                "vacuumes",
                 "dust",
                 "dirt",
                 "carpet",
@@ -70,7 +81,6 @@
                 "lights",
                 "loose",
                 "button",
-                "sensor",
                 "cover",
                 "crack",
                 "damaged",
@@ -106,7 +116,8 @@
                 "settings",
                 "mapping",
                 "route",
-                "navigation"
+                "navigation",
+                "sensor"
             ]
         },
         {
@@ -116,11 +127,9 @@
                 "part",
                 "spare",
                 "batteries",
-                "brush",
                 "filter",
                 "pad",
                 "water tank",
-                "dustbin",
                 "replacement part"
             ]
         },
