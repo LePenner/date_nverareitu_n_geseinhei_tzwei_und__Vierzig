@@ -64,7 +64,7 @@ def send_mail(adress, header, content):
             .send(userId="me", body=create_message)
             .execute()
         )
-        print(f'Message Id: {send_message["id"]}')
+        print(f'Message sent. Id: {send_message["id"]}')
     except HttpError as error:
         print(f"An error occurred: {error}")
         send_message = None

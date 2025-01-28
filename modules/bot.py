@@ -3,20 +3,25 @@ import string
 
 # own imports
 from modules.functionals.sending_messages import send_mail
+from modules.customer_complaint_processing import complaintPorcessing
+
 
 class Bot():
 
-    def input(user_question, chat_session):
+    def input(data):
 
+        user_question = data['mail']['body']
         tags = Bot.check_tags(user_question)
-        Bot.answer(tags, chat_session)
+        Bot.answer(data['email'], 'Auto Support', user_question)
         Bot.log_tags(tags)
 
     def check_tags(question):
 
-        translator = str.maketrans('', '', string.punctuation) # translation key
+        translator = str.maketrans(
+            '', '', string.punctuation)  # translation key
 
-        q_striped = question.translate(translator) # remove punctuation from string
+        # remove punctuation from string
+        q_striped = question.translate(translator)
         q_list = q_striped.lower().split()
 
         with open('modules/functionals/tags.json', 'r') as json_file:
@@ -43,18 +48,17 @@ class Bot():
 
         # remove duplicates
         t_list = []
-        	
+
         for element in q_tags:
             if element not in t_list:
                 t_list.append(element)
 
         q_tags = t_list.copy()
-    
 
         return q_tags
 
-    def answer(tags, chat_session):
-        send_mail(chat_session.send_message)
+    def answer(email, header, question):
+        send_mail(email, header, complaintPorcessing(question))
 
     def log_tags(tags):
         pass

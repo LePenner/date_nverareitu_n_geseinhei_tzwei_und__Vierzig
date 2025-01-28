@@ -11,7 +11,6 @@ from googleapiclient.errors import HttpError
 from modules.bot import Bot
 from modules.functionals.sending_messages import send_mail
 from modules.functionals.check_messages import check_mails
-from modules.customer_complaint_processing import gemini_api_startup
 
 
 def main():
@@ -20,8 +19,6 @@ def main():
 
     credentials_json = "modules/functionals/credentials.json"
     token_json = "modules/functionals/token.json"
-
-    chat_session = gemini_api_startup()
 
     SCOPES = ["https://mail.google.com/"]
 
@@ -44,7 +41,7 @@ def main():
 
         # Endlosschleife mit Abfrageintervallen
         while True:
-            Bot.input(check_mails(service), chat_session)
+            check_mails(service)
             time.sleep(10)  # mail polling rate
 
     except HttpError as error:

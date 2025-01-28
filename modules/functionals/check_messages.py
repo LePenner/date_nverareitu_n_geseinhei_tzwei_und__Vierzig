@@ -1,11 +1,6 @@
-import os
-import time
 import base64
-from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
-from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
+
+from modules.bot import Bot
 
 
 def check_mails(service):
@@ -57,8 +52,13 @@ def check_mails(service):
                         body={"removeLabelIds": ["UNREAD"]}
                     ).execute()
 
-                    print(f"Message {message.get('text')
+                    print(f"Message {message.get('id')
                                      } handled")
+
+                    if "<" in sender:
+                        email = sender.split("<")[1].strip(">")
+                    else:
+                        email = sender
 
                     data = {
                         'mail': {
@@ -66,9 +66,12 @@ def check_mails(service):
                             'sender': sender,
                             'body': body
                         },
-                        'thread_id': message.get('threadId')
+                        'thread_id': message.get('threadId'),
+                        'email': email
                     }
-                    return data
+
+                    if data:
+                        Bot.input(data)
 
                 except Exception as e:
                     print(f"Failed to mark message as read: {e}")
