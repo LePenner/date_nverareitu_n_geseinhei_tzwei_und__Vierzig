@@ -1,13 +1,15 @@
 import json
 import string
 
+# own imports
+from modules.functionals.sending_messages import send_mail
 
 class Bot():
 
-    def input(user_question, api):
+    def input(user_question, chat_session):
 
         tags = Bot.check_tags(user_question)
-        Bot.answer(tags, api)
+        Bot.answer(tags, chat_session)
         Bot.log_tags(tags)
 
     def check_tags(question):
@@ -51,8 +53,8 @@ class Bot():
 
         return q_tags
 
-    def answer(tags):
-        pass
+    def answer(tags, chat_session):
+        send_mail(chat_session.send_message)
 
-    def log_tags():
+    def log_tags(tags):
         pass
