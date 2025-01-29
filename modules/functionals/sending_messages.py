@@ -19,26 +19,24 @@ SCOPES = ["https://mail.google.com/"]
 
 def send_mail(adress, header, content):
 
-    token_json = "modules/functionals/token.json"
+    TOKEN_JSON = "modules/functionals/token.json"
 
-    creds = Credentials.from_authorized_user_file(token_json, SCOPES)
+    CREDS = Credentials.from_authorized_user_file(TOKEN_JSON, SCOPES)
 
     try:
-        service = build("gmail", "v1", credentials=creds)
+        service = build("gmail", "v1", credentials=CREDS)
         message = EmailMessage()
 
-        # ----------------------------- message content <--> text here ----------------------------- #
         message.set_content(content)
 
         message["To"] = adress
         message["From"] = "bugland.botbob@gmail.com"
         message["Subject"] = header
 
-        # encoded message
         encoded_message = base64.urlsafe_b64encode(message.as_bytes()).decode()
 
         create_message = {"raw": encoded_message}
-        # pylint: disable=E1101
+
         send_message = (
             service.users()
             .messages()

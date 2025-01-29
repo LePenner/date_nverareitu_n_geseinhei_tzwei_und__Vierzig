@@ -16,49 +16,55 @@ from modules.console import Console
 
 def main():
 
+    # ready console for pretty output
     Console.clear()
+
+    # det path
     os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
-    credentials_json = "modules/functionals/credentials.json"
-    token_json = "modules/functionals/token.json"
-
+    # constants
+    CREDENTIALS_JSON = "modules/functionals/credentials.json"
+    TOKEN_JSON = "modules/functionals/token.json"
     SCOPES = ["https://mail.google.com/"]
 
+    # check for gmail token, if not found ask user to log in and crteate token
     creds = None
-    if os.path.exists(token_json):
-        creds = Credentials.from_authorized_user_file(token_json, SCOPES)
+    if os.path.exists(TOKEN_JSON):
+        creds = Credentials.from_authorized_user_file(TOKEN_JSON, SCOPES)
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                credentials_json, SCOPES
+                CREDENTIALS_JSON, SCOPES
             )
             creds = flow.run_local_server(port=0)
-        with open(token_json, "w") as token:
+        with open(TOKEN_JSON, "w") as token:
             token.write(creds.to_json())
 
     try:
         service = build("gmail", "v1", credentials=creds)
 
-        poll_rate = 10  # polling rate in seconds - use more or eaqual to 10
-        Console.spinner_speed = 8
+        poll_rate = 10  # polling rate in seconds - use more or eaqual to 10 to stay in monthly 2 mil call limit
+        Console.spinner_speed = 8  # 4 equals one rotation a second
 
-        count = poll_rate * Console.spinner_speed
+        count = poll_rate * Console.spinner_speed  # start count on max to ease debuging
 
         while True:
 
-            Console.spinner_spin()
-
+            # every 10 seconds the count reaches max
             if count >= poll_rate * Console.spinner_speed:
                 check_mails(service)
                 count = 0
 
+            # but sleep is called every second, so ratio is 1:10
             time.sleep(poll_rate / Console.spinner_speed / 10)
+            Console.spinner_spin()
+
             count += 1
 
     except HttpError as error:
-        Console.status(f"Ein Fehler ist aufgetreten: {error}")
+        Console.status(f"Error: {error}")
 
 
 if __name__ == "__main__":

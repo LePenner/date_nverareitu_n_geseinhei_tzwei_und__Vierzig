@@ -16,7 +16,7 @@ def check_mails(service):
         if not messages:
             Console.status('fetching')
 
-        # mails found
+        # on mails found
         else:
             Console.status(f"{len(messages)} new mails")
 
@@ -26,6 +26,7 @@ def check_mails(service):
                 message = service.users().messages().get(
                     userId="me", id=message.get('id'), format="full").execute()
 
+                # header and sender
                 headers = message["payload"]["headers"]
                 subject = next(
                     (header["value"] for header in headers if header["name"] == "Subject"), "No Subject")
@@ -45,6 +46,7 @@ def check_mails(service):
                             part["body"]["data"]).decode("utf-8")
                         break
 
+                # for unknown email structures:
                 if not parts:
 
                     try:
@@ -65,11 +67,13 @@ def check_mails(service):
                     Console.status(f"Message {message.get('id')
                                               } handled")
 
+                    # seperate email from sender
                     if "<" in sender:
                         email = sender.split("<")[1].strip(">")
                     else:
                         email = sender
 
+                    # format needed data
                     data = {
                         'mail': {
                             'subject': subject,
@@ -81,6 +85,11 @@ def check_mails(service):
                     }
 
                     if data:
+
+                        ################################################
+                        #                 start the bot                #
+                        ################################################
+
                         Bot.input(data)
 
                 except Exception as e:

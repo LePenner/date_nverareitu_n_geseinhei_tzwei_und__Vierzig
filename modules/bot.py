@@ -11,9 +11,9 @@ class Bot():
     def input(data):
 
         user_question = data['mail']['body']
-        tags = Bot.check_tags(user_question)
+
+        tags = Bot.check_tags(user_question)  # not in use currently
         Bot.answer(data['email'], 'Auto Support', user_question)
-        Bot.log_tags(tags)
 
     def check_tags(question):
 
@@ -38,12 +38,12 @@ class Bot():
 
             q_tags = []
 
-            # excess keywords from json file and get tags of matching words from user question
+            # acess keywords from json file and get tags of matching words from user question
             for tag in json_tag_data["tags"]:
                 for values in tag.values():
                     for word in q_list:
                         if word in values:
-                            # tag.keys returns dict_keys object --> conversion to string with list
+                            # tag.keys() returns dict_keys object --> conversion to string with list
                             q_tags.append(list(tag.keys())[0])
 
         # remove duplicates
