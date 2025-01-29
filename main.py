@@ -15,7 +15,7 @@ from modules.console import Console
 
 
 def main():
-
+    print(os.name)
     # ready console for pretty output
     Console.clear()
 
@@ -27,7 +27,7 @@ def main():
     TOKEN_JSON = "modules/functionals/token.json"
     SCOPES = ["https://mail.google.com/"]
 
-    # check for gmail token, if not found ask user to log in and crteate token
+    # check for gmail token, if not found ask user to log in and create token
     creds = None
     if os.path.exists(TOKEN_JSON):
         creds = Credentials.from_authorized_user_file(TOKEN_JSON, SCOPES)

@@ -3,7 +3,7 @@ import string
 
 # own imports
 from modules.functionals.sending_messages import send_mail
-from modules.customer_complaint_processing import complaintPorcessing
+from modules.customer_complaint_processing import complaintPorcessing, niceAnswer
 
 
 class Bot():
@@ -13,7 +13,8 @@ class Bot():
         user_question = data['mail']['body']
 
         tags = Bot.check_tags(user_question)  # not in use currently
-        Bot.answer(data['email'], 'Auto Support', user_question)
+        Bot.answer(data['email'], user_question)
+
 
     def check_tags(question):
 
@@ -57,8 +58,10 @@ class Bot():
 
         return q_tags
 
-    def answer(email, header, question):
-        send_mail(email, header, complaintPorcessing(question))
+    def answer(email, question):
+        #return_response = complaintPorcessing(question)
+        niceAnswer(question,email)
 
     def log_tags(tags):
         pass
+

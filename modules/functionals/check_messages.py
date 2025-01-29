@@ -64,8 +64,9 @@ def check_mails(service):
                         body={"removeLabelIds": ["UNREAD"]}
                     ).execute()
 
-                    Console.status(f"Message {message.get('id')
-                                              } handled")
+                    Console.status(f"Message {message.get('id')} handled")
+                    #with open("log.txt", "a") as file:
+                    #    file.write(f"Message {message.get('id')} handled")
 
                     # seperate email from sender
                     if "<" in sender:
@@ -94,6 +95,8 @@ def check_mails(service):
 
                 except Exception as e:
                     Console.status(f"Failed to mark message as read: {e}")
+                    print(f"Failed to mark message as read: {e}")
+                    exit(0)
 
     except Exception as e:
         Console.status(f"Fehler beim Abrufen neuer E-Mails: {e}")
