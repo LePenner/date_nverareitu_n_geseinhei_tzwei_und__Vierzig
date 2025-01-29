@@ -1,4 +1,5 @@
 import os
+import datetime as dt
 
 # class to display spinner and a status, log any displayed messages
 
@@ -24,6 +25,8 @@ class Console():
         if len(fin) > spinner_width:
             spinner_width = len(fin)
 
+    os.remove("log.txt")
+
     def init():
         print(' >>>', end='\r')
 
@@ -45,3 +48,7 @@ class Console():
         if spin == True:
             Console.spinner_spin()
         print(f'\033[{6+Console.spinner_width}C{text}', end='\r')
+
+        with open("log.txt", "a") as f:
+            print(f"[{dt.datetime.now().strftime(
+                '%Y-%m-%d %H:%M:%S')}] {text}", file=f)
