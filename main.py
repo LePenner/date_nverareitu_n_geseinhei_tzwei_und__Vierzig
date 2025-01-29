@@ -11,10 +11,12 @@ from googleapiclient.errors import HttpError
 from modules.bot import Bot
 from modules.functionals.sending_messages import send_mail
 from modules.functionals.check_messages import check_mails
+from modules.console import Console
 
 
 def main():
 
+    Console.clear()
     os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
     credentials_json = "modules/functionals/credentials.json"
@@ -39,13 +41,24 @@ def main():
     try:
         service = build("gmail", "v1", credentials=creds)
 
-        # Endlosschleife mit Abfrageintervallen
+        poll_rate = 10  # polling rate in seconds - use more or eaqual to 10
+        Console.spinner_speed = 8
+
+        count = poll_rate * Console.spinner_speed
+
         while True:
-            check_mails(service)
-            time.sleep(10)  # mail polling rate
+
+            Console.spinner_spin()
+
+            if count >= poll_rate * Console.spinner_speed:
+                check_mails(service)
+                count = 0
+
+            time.sleep(poll_rate / Console.spinner_speed / 10)
+            count += 1
 
     except HttpError as error:
-        print(f"Ein Fehler ist aufgetreten: {error}")
+        Console.status(f"Ein Fehler ist aufgetreten: {error}")
 
 
 if __name__ == "__main__":

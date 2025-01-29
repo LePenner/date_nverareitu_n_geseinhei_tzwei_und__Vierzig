@@ -1,6 +1,7 @@
 import base64
 
 from modules.bot import Bot
+from modules.console import Console
 
 
 def check_mails(service):
@@ -13,11 +14,11 @@ def check_mails(service):
         messages = results.get("messages", [])
 
         if not messages:
-            print('fetching')
+            Console.status('fetching')
 
         # mails found
         else:
-            print(f"{len(messages)} new mails")
+            Console.status(f"{len(messages)} new mails")
 
             for message in messages:
 
@@ -44,6 +45,15 @@ def check_mails(service):
                             part["body"]["data"]).decode("utf-8")
                         break
 
+                if not parts:
+
+                    try:
+                        body = base64.urlsafe_b64decode(
+                            message['payload']['body']['data']).decode("utf-8")
+                    except Exception as e:
+                        Console.status(f"Failed to read message: {e}")
+                        break
+
                 try:
                     # mark message as read
                     service.users().messages().modify(
@@ -52,8 +62,8 @@ def check_mails(service):
                         body={"removeLabelIds": ["UNREAD"]}
                     ).execute()
 
-                    print(f"Message {message.get('id')
-                                     } handled")
+                    Console.status(f"Message {message.get('id')
+                                              } handled")
 
                     if "<" in sender:
                         email = sender.split("<")[1].strip(">")
@@ -74,7 +84,7 @@ def check_mails(service):
                         Bot.input(data)
 
                 except Exception as e:
-                    print(f"Failed to mark message as read: {e}")
+                    Console.status(f"Failed to mark message as read: {e}")
 
     except Exception as e:
-        print(f"Fehler beim Abrufen neuer E-Mails: {e}")
+        Console.status(f"Fehler beim Abrufen neuer E-Mails: {e}")
