@@ -25,7 +25,11 @@ class Console():
         if len(fin) > spinner_width:
             spinner_width = len(fin)
 
-    os.remove("log.txt")
+    try:
+        os.remove("log.txt")
+    except:
+        pass
+    
 
     def init():
         print(' >>>', end='\r')
