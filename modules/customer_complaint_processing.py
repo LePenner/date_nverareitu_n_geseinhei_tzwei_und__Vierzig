@@ -1,6 +1,6 @@
 import google.generativeai as genai
 import json
-from ticket import Ticket_db
+from modules.ticket import Ticket_db
 
 from modules.functionals.sending_messages import send_mail
 
