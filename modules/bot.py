@@ -1,7 +1,8 @@
 import json
 import string
 
-# own imports
+# own import
+from modules.console import Console
 from modules.functionals.sending_messages import send_mail
 from modules.customer_complaint_processing import complaintPorcessing, niceAnswer
 
@@ -12,11 +13,14 @@ class Bot():
 
         user_question = data['mail']['body']
 
-        tags = Bot.check_tags(user_question)  # not in use currently
-        Bot.answer(data['email'], user_question)
+        # not in use currently
+        tags = Bot.check_tags(data['paths'], user_question)
+        Console.status(f'Tags generated: {tags}')
+        Bot.answer(data['service'], data['paths'],
+                   data['email'], user_question)
+        Console.status('Request Handled')
 
-
-    def check_tags(question):
+    def check_tags(PATHS, question):
 
         translator = str.maketrans(
             '', '', string.punctuation)  # translation key
@@ -25,7 +29,7 @@ class Bot():
         q_striped = question.translate(translator)
         q_list = q_striped.lower().split()
 
-        with open('modules/functionals/tags.json', 'r') as json_file:
+        with open(PATHS['tags'], 'r') as json_file:
             json_tag_data = json.load(json_file)
 
             # {
@@ -58,10 +62,9 @@ class Bot():
 
         return q_tags
 
-    def answer(email, question):
-        #return_response = complaintPorcessing(question)
-        niceAnswer(question,email)
+    def answer(SERVICE, PATHS, email, question):
+        # return_response = complaintPorcessing(question)
+        niceAnswer(SERVICE, PATHS, question, email)
 
     def log_tags(tags):
         pass
-

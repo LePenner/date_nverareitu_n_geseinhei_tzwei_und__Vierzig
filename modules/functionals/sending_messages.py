@@ -8,23 +8,15 @@ from googleapiclient.errors import HttpError
 
 from modules.console import Console
 
-# If modifying these scopes, delete the file token.json.
-# https://mail.google.com gives perms do delete, read and write mails
-SCOPES = ["https://mail.google.com/"]
 
 ########################################################
 # PLEASE LOG IN WITH bugland.botbob@gmil.com !!!!!!!!! #
 ########################################################
 
 
-def send_mail(adress, header, content):
-
-    TOKEN_JSON = "modules/functionals/token.json"
-
-    CREDS = Credentials.from_authorized_user_file(TOKEN_JSON, SCOPES)
+def send_mail(SERVICE, adress, header, content):
 
     try:
-        service = build("gmail", "v1", credentials=CREDS)
         message = EmailMessage()
 
         message.set_content(content)
@@ -38,7 +30,7 @@ def send_mail(adress, header, content):
         create_message = {"raw": encoded_message}
 
         send_message = (
-            service.users()
+            SERVICE.users()
             .messages()
             .send(userId="me", body=create_message)
             .execute()

@@ -4,12 +4,12 @@ from modules.bot import Bot
 from modules.console import Console
 
 
-def check_mails(service):
+def check_mails(SERVICE, PATHS):
 
     try:
 
         # search for mails with lable unred
-        results = service.users().messages().list(
+        results = SERVICE.users().messages().list(
             userId="me", labelIds=["INBOX"], q="is:unread").execute()
         messages = results.get("messages", [])
 
@@ -23,7 +23,7 @@ def check_mails(service):
             for message in messages:
 
                 # get full message (other is just id)
-                message = service.users().messages().get(
+                message = SERVICE.users().messages().get(
                     userId="me", id=message.get('id'), format="full").execute()
 
                 # header and sender
@@ -58,15 +58,13 @@ def check_mails(service):
 
                 try:
                     # mark message as read
-                    service.users().messages().modify(
+                    SERVICE.users().messages().modify(
                         userId="me",
                         id=message.get('id'),
                         body={"removeLabelIds": ["UNREAD"]}
                     ).execute()
 
-                    Console.status(f"Message {message.get('id')} handled")
-                    #with open("log.txt", "a") as file:
-                    #    file.write(f"Message {message.get('id')} handled")
+                    Console.status(f"Message {message.get('id')} marked as read")
 
                     # seperate email from sender
                     if "<" in sender:
@@ -82,7 +80,9 @@ def check_mails(service):
                             'body': body
                         },
                         'thread_id': message.get('threadId'),
-                        'email': email
+                        'email': email,
+                        'service': SERVICE,
+                        'paths': PATHS
                     }
 
                     if data:

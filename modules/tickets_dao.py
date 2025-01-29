@@ -3,7 +3,7 @@ import sqlite3
 class Ticket_db():
     def __init__(self):
         super().__init__()
-        self.con = sqlite3.connect("functionals/tickets.db")
+        self.con = sqlite3.connect("modules/functionals/tickets.db")
         self.cur = self.con.cursor()
 
         self.cur.execute("""
