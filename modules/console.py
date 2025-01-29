@@ -1,5 +1,6 @@
 import os
 import datetime as dt
+import platform
 
 # class to display spinner and a status, log any displayed messages
 
@@ -39,6 +40,7 @@ class Console():
             Console.init()
         elif os.name == 'posix':
             os.system('clear')
+            Console.init()
 
     # when a function is called the spinner indicates execution of code
     # also clears console on execution
