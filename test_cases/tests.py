@@ -5,6 +5,15 @@ from modules.bot import Bot
 
 def input_tests():
 
+    # file paths
+    CREDENTIALS_JSON = "modules/functionals/credentials.json"
+    TOKEN_JSON = "modules/functionals/token.json"
+    TAGS_JSON = "modules/functionals/tags.json"
+
+    PATHS = {'credentials': CREDENTIALS_JSON,
+             'token': TOKEN_JSON,
+             'tags': TAGS_JSON}
+
     # open test data
     with open('test_cases/json/inputs.json', 'r') as json_test_file:
         json_test_data = json.load(json_test_file)
@@ -13,7 +22,7 @@ def input_tests():
     for test in json_test_data["inputs"]:
 
         fail = False
-        tags = Bot.check_tags(test.get('text'))
+        tags = Bot.check_tags(PATHS, test.get('text'))
 
         # check if calulated and should tags match
         if set(tags) == set(test.get('tags')):
