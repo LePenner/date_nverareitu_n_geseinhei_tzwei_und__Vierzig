@@ -15,7 +15,7 @@ from modules.console import Console
 
 
 def main():
-    print(os.name)
+    
     # ready console for pretty output
     Console.clear()
 
