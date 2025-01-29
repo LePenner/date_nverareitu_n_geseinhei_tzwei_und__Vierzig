@@ -57,7 +57,6 @@ def main():
                 check_mails(service)
                 count = 0
 
-            # but sleep is called every second, so ratio is 1:10
             time.sleep(poll_rate / Console.spinner_speed / 10)
             Console.spinner_spin()
 
