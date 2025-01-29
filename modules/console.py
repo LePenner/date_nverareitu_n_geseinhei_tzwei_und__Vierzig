@@ -29,16 +29,14 @@ class Console():
         os.remove("log.txt")
     except:
         pass
+    
 
     def init():
         print(' >>>', end='\r')
 
     def clear():
-        if os.name == 'nt':
-            os.system('cls')
-            Console.init()
-        elif os.name == 'posix':
-            os.system('clear')
+        os.system('cls')
+        Console.init()
 
     # when a function is called the spinner indicates execution of code
     # also clears console on execution
@@ -56,5 +54,4 @@ class Console():
         print(f'\033[{6+Console.spinner_width}C{text}', end='\r')
 
         with open("log.txt", "a") as f:
-            print(f"[{dt.datetime.now().strftime(
-                '%Y-%m-%d %H:%M:%S')}] {text}", file=f)
+            print(f"[{dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] {text}", file=f)
