@@ -29,14 +29,16 @@ class Console():
         os.remove("log.txt")
     except:
         pass
-    
 
     def init():
         print(' >>>', end='\r')
 
     def clear():
-        os.system('cls')
-        Console.init()
+        if os.name == 'nt':
+            os.system('cls')
+            Console.init()
+        elif os.name == 'posix':
+            os.system('clear')
 
     # when a function is called the spinner indicates execution of code
     # also clears console on execution
