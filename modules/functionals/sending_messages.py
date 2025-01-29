@@ -19,13 +19,8 @@ SCOPES = ["https://mail.google.com/"]
 
 def send_mail(adress, header, content):
 
-    credentials_json = "modules/functionals/credentials.json"
     token_json = "modules/functionals/token.json"
 
-    creds = None
-    # The file token.json stores the user's access and refresh tokens, and is
-    # created automatically when the authorization flow completes for the first
-    # time.
     creds = Credentials.from_authorized_user_file(token_json, SCOPES)
 
     try:
