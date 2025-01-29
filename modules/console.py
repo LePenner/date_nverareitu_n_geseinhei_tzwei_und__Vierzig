@@ -1,10 +1,28 @@
 import os
 
+# class to display spinner and a status, log any displayed messages
+
 
 class Console():
 
+    # please edit spinner speed from main.py
     spinner_speed = 0
     spinner = ['/', '-', '\\', '|']
+
+    # spinners at https://github.com/manrajgrover/py-spinners/blob/master/spinners/spinners.py
+    # alt spinners:
+
+    # spinner = [".", "o", "O", "o"]
+    # spinner = ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█", "▇", "▆", "▅", "▄", "▃", "▂", "▁"]
+    # spinner = ["o", " o", "  o", "   o", "    o", "     o", "      o", "       o"]
+    # spinner = ["⠁", "⠉", "⠒", "⠤", "⠦", "⠴", "⠶", "⠷", "⠿"]
+    # spinner = ["⊶", "⊷"]
+    # spinner = ["■", "□"]
+
+    spinner_width = 0
+    for fin in spinner:
+        if len(fin) > spinner_width:
+            spinner_width = len(fin)
 
     def init():
         print(' >>>', end='\r')
@@ -26,4 +44,4 @@ class Console():
 
         if spin == True:
             Console.spinner_spin()
-        print(f'\033[7C{text}', end='\r')
+        print(f'\033[{6+Console.spinner_width}C{text}', end='\r')
