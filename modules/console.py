@@ -60,3 +60,8 @@ class Console():
         with open("log.txt", "a") as f:
             print(f"[{dt.datetime.now().strftime(
                 '%Y-%m-%d %H:%M:%S')}] {text}", file=f)
+
+    def log(text):
+        with open("log.txt", "a") as f:
+            print(f"[{dt.datetime.now().strftime(
+                '%Y-%m-%d %H:%M:%S')}] {text}", file=f)

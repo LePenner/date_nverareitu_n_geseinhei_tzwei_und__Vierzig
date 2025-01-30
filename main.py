@@ -52,8 +52,9 @@ def main():
                  'token': TOKEN_JSON,
                  'tags': TAGS_JSON}
 
-        poll_rate = 10  # polling rate in seconds - use more or eaqual to 10 to stay in monthly 2 mil call limit
-        Console.spinner_speed = 8  # 4 equals one rotation a second
+        poll_rate = 10  # polling rate in seconds - use more or eaqual to 10 to stay in monthly 2 mil call limit - absolute limit: 1
+        spinner_speed = 8  # 4 equals one rotation a second
+        Console.spinner_speed = spinner_speed*poll_rate/10
 
         count = poll_rate * Console.spinner_speed  # start count on max to ease debuging
 

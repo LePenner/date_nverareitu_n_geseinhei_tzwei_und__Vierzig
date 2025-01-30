@@ -3,6 +3,7 @@ import json
 from modules.ticket import Ticket_db
 
 from modules.functionals.sending_messages import send_mail
+from modules.console import Console
 
 
 def complaintPorcessing(PATHS, complaint: str):
@@ -25,7 +26,10 @@ def complaintPorcessing(PATHS, complaint: str):
     return processedResponse
 
 
-def niceAnswer(SERVICE, PATHS, complaint, eMail):
+def niceAnswer(data, complaint):
+
+    PATHS = data['paths']
+
     with open(PATHS['credentials'], 'r') as json_file:
         jsonCredentialsData = json.load(json_file)
     genai.configure(api_key=jsonCredentialsData["GenAiApiKey"])
@@ -44,6 +48,6 @@ def niceAnswer(SERVICE, PATHS, complaint, eMail):
                              1,
                              '')"""
 
-    send_mail(SERVICE, eMail,
-              "This is an Automated response to your Problem regarding Bugland Company", response.text)
+    Console.status('answer generated')
+    send_mail(data, response.text)
     return None
