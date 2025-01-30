@@ -71,7 +71,7 @@ def check_mails(SERVICE, PATHS):
                         email = sender.split("<")[1].strip(">")
                     else:
                         email = sender
-
+                    name = email.split("@")[0]
                     # format needed data
                     data = {
                         'mail': {
@@ -81,6 +81,7 @@ def check_mails(SERVICE, PATHS):
                         },
                         'thread_id': message.get('threadId'),
                         'email': email,
+                        'name': name,
                         'service': SERVICE,
                         'paths': PATHS
                     }
@@ -95,8 +96,6 @@ def check_mails(SERVICE, PATHS):
 
                 except Exception as e:
                     Console.status(f"Failed to mark message as read: {e}")
-                    print(f"Failed to mark message as read: {e}")
-                    exit(0)
 
     except Exception as e:
         Console.status(f"Fehler beim Abrufen neuer E-Mails: {e}")
