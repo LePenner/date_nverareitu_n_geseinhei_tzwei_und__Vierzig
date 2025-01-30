@@ -52,7 +52,7 @@ def niceAnswer(data, complaint):
 
     ticket_instance = Ticket_db()
     try:
-        ticket_instance.create_ticket(UUID, email, complaint, response.text, processedcomplaint, data)
+        ticket_instance.create_ticket(UUID, email, complaint, response.result["candidates"][0]["content"]["parts"][0]["text"], processedcomplaint, data)
     except Exception as e:
         Console.status('Ticket Creation failed: ',e)
 
