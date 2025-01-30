@@ -19,6 +19,7 @@ def complaintPorcessing(PATHS, complaint: str):
 
     # gemeni adds ```json ... ``` to the output and im removing it in hope that there is not another json in the output
     processedResponse = response.text
+    Console.log(response.text)
     processedResponseList = processedResponse.split("```")
     processedResponse = processedResponseList[1]
     processedResponseList = processedResponse.split("json")
@@ -51,7 +52,7 @@ def niceAnswer(data, complaint):
 
     ticket_instance = Ticket_db()
     try:
-        ticket_instance.create_ticket(UUID, email, complaint, response, processedcomplaint, data)
+        ticket_instance.create_ticket(UUID, email, complaint, response.text, processedcomplaint, data)
     except Exception as e:
         Console.status('Ticket Creation failed: ',e)
 

@@ -1,4 +1,5 @@
 import sqlite3
+from modules.console import Console
 
 class Ticket_db():
     def __init__(self):
@@ -22,6 +23,10 @@ class Ticket_db():
         self.con.commit()
 
     def create_ticket(self, ticket_id, customer_mail, complaint, AIResponse, ai_details, data, ):
+        Console.log(AIResponse)
+        Console.log(complaint)
+        Console.log(ai_details)
+        Console.log(data)
         thread_id = data["thread_id"]
         name = data["name"]
         tags_legacy = []
