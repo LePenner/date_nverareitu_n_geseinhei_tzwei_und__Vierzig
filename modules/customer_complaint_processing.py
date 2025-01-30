@@ -45,8 +45,7 @@ def niceAnswer(data, complaint):
                                       f"the customer ticket id is as follows: ---{UUID}---"
                                       )
 
-    send_mail(SERVICE, eMail,
-              "This is an Automated response to your Problem regarding Bugland Company ltd.", response.text)
+
     try:
         processedcomplaint = dict(complaintPorcessing(PATHS, complaint))
     except Exception as e:
