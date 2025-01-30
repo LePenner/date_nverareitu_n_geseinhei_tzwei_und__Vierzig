@@ -48,7 +48,7 @@ def niceAnswer(SERVICE, PATHS, complaint, eMail, data):
                              response.text,
                              [],
                              1,
-                             '', data)
+                             '', data, response.text)
 
     send_mail(SERVICE, eMail,
               "This is an Automated response to your Problem regarding Bugland Company ltd.", response.text)
