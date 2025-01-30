@@ -1,6 +1,8 @@
 import google.generativeai as genai
 import json
 import uuid
+
+from modules.console import Console
 from modules.ticket import Ticket_db
 
 from modules.functionals.sending_messages import send_mail
@@ -39,6 +41,13 @@ def niceAnswer(SERVICE, PATHS, complaint, eMail, data):
                                       f"the customer ticket id is as follows: ---{UUID}---"
                                       )
 
+    send_mail(SERVICE, eMail,
+              "This is an Automated response to your Problem regarding Bugland Company ltd.", response.text)
+    try:
+        processedcomplaint = dict(complaintPorcessing(PATHS, complaint))
+    except Exception as e:
+        Console.status(e)
+
     ticket_instance = Ticket_db()
     ticket_instance.create_ticket(UUID,
                              eMail,
@@ -48,8 +57,5 @@ def niceAnswer(SERVICE, PATHS, complaint, eMail, data):
                              response.text,
                              [],
                              1,
-                             '', data, response.text)
-
-    send_mail(SERVICE, eMail,
-              "This is an Automated response to your Problem regarding Bugland Company ltd.", response.text)
+                             '', data, response.text, processedcomplaint)
     return None
