@@ -2,7 +2,7 @@ import google.generativeai as genai
 import json
 import uuid
 from modules.ticket import Ticket_db
-from console import Console
+from modules.console import Console
 
 from modules.functionals.sending_messages import send_mail
 
@@ -50,7 +50,10 @@ def niceAnswer(data, complaint):
 
 
     ticket_instance = Ticket_db()
-    ticket_instance.create_ticket(UUID, email, complaint, response, processedcomplaint, data)
+    try:
+        ticket_instance.create_ticket(UUID, email, complaint, response, processedcomplaint, data)
+    except Exception as e:
+        Console.status('Ticket Creation failed: ',e)
 
     send_mail(data, response.text)
     return None
