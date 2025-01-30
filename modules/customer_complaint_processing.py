@@ -28,9 +28,13 @@ def complaintPorcessing(PATHS, complaint: str):
     return processedResponse
 
 
-def niceAnswer(SERVICE, PATHS, complaint, eMail, data):
-    name = eMail.split("@")[0]
+def niceAnswer(data, complaint):
+
+    PATHS = data['paths']
     UUID = str(uuid.uuid4())
+    name = data['name']
+    email = data['email']
+
     with open(PATHS['credentials'], 'r') as json_file:
         jsonCredentialsData = json.load(json_file)
     genai.configure(api_key=jsonCredentialsData["GenAiApiKey"])
@@ -50,12 +54,14 @@ def niceAnswer(SERVICE, PATHS, complaint, eMail, data):
 
     ticket_instance = Ticket_db()
     ticket_instance.create_ticket(UUID,
-                             eMail,
+                             email,
                              complaint,
                              123,
                              [1,2,3],
                              response.text,
                              [],
                              1,
-                             '', data, response.text, processedcomplaint)
+                             '', data, response.text)
+
+    send_mail(data, response.text)
     return None

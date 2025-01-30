@@ -56,6 +56,9 @@ class Console():
         if spin == True:
             Console.spinner_spin()
         print(f'\033[{6+Console.spinner_width}C{text}', end='\r')
+        Console.log(text)
 
+    def log(text):
         with open("log.txt", "a") as f:
-            print(f"[{dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] {text}", file=f)
+            print(f"[{dt.datetime.now().strftime(
+                '%Y-%m-%d %H:%M:%S')}] {text}", file=f)
