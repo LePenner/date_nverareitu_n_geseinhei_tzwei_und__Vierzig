@@ -45,10 +45,9 @@ def niceAnswer(data, complaint):
                                       )
 
 
-    try:
-        processedcomplaint = dict(complaintPorcessing(PATHS, complaint))
-    except Exception as e:
-        Console.status(e)
+
+    processedcomplaint = complaintPorcessing(PATHS, complaint)
+
 
     ticket_instance = Ticket_db()
     ticket_instance.create_ticket(UUID, email, complaint, response, processedcomplaint, data)
