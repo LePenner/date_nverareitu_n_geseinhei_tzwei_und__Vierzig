@@ -9,14 +9,14 @@ class Console():
 
     # please edit spinner speed from main.py
     spinner_speed = 0
-    spinner = ['/', '-', '\\', '|']
+    #spinner = ['/', '-', '\\', '|']
 
     # spinners at https://github.com/manrajgrover/py-spinners/blob/master/spinners/spinners.py
     # alt spinners:
 
     # spinner = [".", "o", "O", "o"]
     # spinner = ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█", "▇", "▆", "▅", "▄", "▃", "▂", "▁"]
-    # spinner = ["o", " o", "  o", "   o", "    o", "     o", "      o", "       o"]
+    spinner = ["o", " o", "  o", "   o", "    o", "     o", "      o", "       o"]
     # spinner = ["⠁", "⠉", "⠒", "⠤", "⠦", "⠴", "⠶", "⠷", "⠿"]
     # spinner = ["⊶", "⊷"]
     # spinner = ["■", "□"]
@@ -56,10 +56,7 @@ class Console():
         if spin == True:
             Console.spinner_spin()
         print(f'\033[{6+Console.spinner_width}C{text}', end='\r')
-
-        with open("log.txt", "a") as f:
-            print(f"[{dt.datetime.now().strftime(
-                '%Y-%m-%d %H:%M:%S')}] {text}", file=f)
+        Console.log(text)
 
     def log(text):
         with open("log.txt", "a") as f:
