@@ -23,10 +23,13 @@ class Ticket_db():
         self.con.commit()
 
     def create_ticket(self, ticket_id, customer_mail, complaint, AIResponse, ai_details, data, ):
-        Console.log("AIResponse: " + AIResponse)
-        Console.log("complaint: " + complaint)
-        Console.log("ai_details: " + ai_details)
-        Console.log("data: " + data)
+        Console.log("received ticket_id: " + ticket_id)
+        Console.log("received customer_mail: " + customer_mail)
+        Console.log("received complaint: " + complaint)
+        Console.log("received AIResponse:\n" + AIResponse)
+        Console.log("received ai_details:\n" + ai_details)
+        Console.log("received data:\n" + data)
+        Console.log("received all data")
         thread_id = data["thread_id"]
         name = data["name"]
         tags_legacy = []
@@ -34,16 +37,20 @@ class Ticket_db():
         tags_legacy_str = ','.join(tags_legacy)
         extra_bin = ''
         level = 2
+        Console.log("refactored all data")
 
         for problem in ai_details["Problems"]:
             tags_ai = problem["tags"]
             tags_ai_str = ','.join(tags_ai)
 
             sql_data = (ticket_id, thread_id, name, customer_mail, complaint, history_str, tags_ai_str, tags_legacy_str, level, extra_bin)
+            Console.log("received sql_data:\n" + sql_data)
+
             self.cur.execute(
                 "INSERT INTO tickets (ticket_id, thread_id, name, customer_mail, complaint, history, tags_ai, tags_legacy, level, extra_bin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 sql_data)
             self.con.commit()
+            Console.log("added to db")
 
         #res = self.cur.execute("SELECT * FROM tickets")
         #rows = res.fetchall()
