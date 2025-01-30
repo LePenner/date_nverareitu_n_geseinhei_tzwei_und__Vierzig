@@ -8,8 +8,6 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 # own imports
-from modules.bot import Bot
-from modules.functionals.sending_messages import send_mail
 from modules.functionals.check_messages import check_mails
 from modules.console import Console
 

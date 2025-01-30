@@ -1,10 +1,10 @@
 import json
 import string
 
-# own import
+# own imports
 from modules.console import Console
 from modules.functionals.sending_messages import send_mail
-from modules.customer_complaint_processing import complaintPorcessing, niceAnswer
+from modules.customer_complaint_processing import ai_text_answer
 
 
 class Bot():
@@ -63,7 +63,7 @@ class Bot():
 
     def answer(data, question):
         # return_response = complaintPorcessing(question)
-        niceAnswer(data, question)
+        send_mail(data, ai_text_answer(data, question))
 
     def log_tags(tags):
         pass
