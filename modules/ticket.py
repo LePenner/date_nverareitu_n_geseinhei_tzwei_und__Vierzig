@@ -8,11 +8,12 @@ class Ticket_db():
 
         self.cur.execute("""
             CREATE TABLE IF NOT EXISTS tickets (
-                ticket_id INTEGER,
-                customer_mail TEXT,
-                question TEXT,
+                ticket_id VARCHAR(255),
+                thread_id VARCHAR(255),
+                name VARCHAR(255),
+                customer_mail VARCHAR(255),
+                complaint TEXT,
                 history TEXT,
-                thread_id INTEGER,
                 tags_ai TEXT,
                 tags_legacy TEXT,
                 level INTEGER,
@@ -20,16 +21,24 @@ class Ticket_db():
             )""")
         self.con.commit()
 
-    def create_ticket(self, ticket_id, customer_mail, question, history, thread_id, tags_ai, tags_legacy, level, extra_bin, data, AIResponse, processedcomplaint):
-        history_str = ','.join(history)
-        tags_ai_str = ','.join(tags_ai)
+    def create_ticket(self, ticket_id, customer_mail, complaint, AIResponse, ai_details, data, ):
+        thread_id = data["thread_id"]
+        name = data["name"]
+        tags_legacy = []
+        history_str = AIResponse
         tags_legacy_str = ','.join(tags_legacy)
+        extra_bin = ''
+        level = 2
 
-        data = (ticket_id, customer_mail, question, history_str, thread_id, tags_ai_str, tags_legacy_str, level, extra_bin)
-        self.cur.execute(
-            "INSERT INTO tickets (ticket_id, customer_mail, question, history, thread_id, tags_ai, tags_legacy, level, extra_bin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            data)
-        self.con.commit()
+        for problem in ai_details["Problems"]:
+            tags_ai = problem["tags"]
+            tags_ai_str = ','.join(tags_ai)
+
+            sql_data = (ticket_id, thread_id, name, customer_mail, complaint, history_str, tags_ai_str, tags_legacy_str, level, extra_bin)
+            self.cur.execute(
+                "INSERT INTO tickets (ticket_id, thread_id, name, customer_mail, complaint, history, tags_ai, tags_legacy, level, extra_bin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                sql_data)
+            self.con.commit()
 
         #res = self.cur.execute("SELECT * FROM tickets")
         #rows = res.fetchall()

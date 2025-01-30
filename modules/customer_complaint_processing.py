@@ -1,9 +1,8 @@
 import google.generativeai as genai
 import json
 import uuid
-
-from modules.console import Console
 from modules.ticket import Ticket_db
+from console import Console
 
 from modules.functionals.sending_messages import send_mail
 
@@ -52,15 +51,7 @@ def niceAnswer(data, complaint):
         Console.status(e)
 
     ticket_instance = Ticket_db()
-    ticket_instance.create_ticket(UUID,
-                             email,
-                             complaint,
-                             123,
-                             [1,2,3],
-                             response.text,
-                             [],
-                             1,
-                             '', data, response.text)
+    ticket_instance.create_ticket(UUID, email, complaint, response, processedcomplaint, data)
 
     send_mail(data, response.text)
     return None
