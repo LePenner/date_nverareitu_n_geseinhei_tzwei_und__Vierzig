@@ -9,9 +9,9 @@ from googleapiclient.errors import HttpError
 from modules.console import Console
 
 
-########################################################
-# PLEASE LOG IN WITH bugland.botbob@gmil.com !!!!!!!!! #
-########################################################
+#########################################################
+# PLEASE LOG IN WITH bugland.botbob@gmail.com !!!!!!!!! #
+#########################################################
 
 
 def send_mail(SERVICE, adress, header, content):
