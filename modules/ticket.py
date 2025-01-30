@@ -20,7 +20,7 @@ class Ticket_db():
             )""")
         self.con.commit()
 
-    def create_ticket(self, ticket_id, customer_mail, question, history, thread_id, tags_ai, tags_legacy, level, extra_bin):
+    def create_ticket(self, ticket_id, customer_mail, question, history, thread_id, tags_ai, tags_legacy, level, extra_bin, data):
         history_str = ','.join(history)
         tags_ai_str = ','.join(tags_ai)
         tags_legacy_str = ','.join(tags_legacy)

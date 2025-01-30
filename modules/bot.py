@@ -17,7 +17,7 @@ class Bot():
         tags = Bot.check_tags(data['paths'], user_question)
         Console.status(f'Tags generated: {tags}')
         Bot.answer(data['service'], data['paths'],
-                   data['email'], user_question)
+                   data['email'], user_question, data)
         Console.status('Request Handled')
 
     def check_tags(PATHS, question):
@@ -62,9 +62,9 @@ class Bot():
 
         return q_tags
 
-    def answer(SERVICE, PATHS, email, question):
+    def answer(SERVICE, PATHS, email, question, data):
         # return_response = complaintPorcessing(question)
-        niceAnswer(SERVICE, PATHS, question, email)
+        niceAnswer(SERVICE, PATHS, question, email, data)
 
     def log_tags(tags):
         pass
