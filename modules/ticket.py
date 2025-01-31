@@ -71,7 +71,8 @@ class Ticket_db():
                 self.con.commit()
                 Console.log("added to db")
         except Exception as e:
-            Console.log("no ai tags recognised: " + e)
+            Console.log("no ai tags recognised:")
+            Console.log(e)
             tags_ai_str = "none"
             sql_data = (
             ticket_id, thread_id, name, customer_mail, complaint, history_str, tags_ai_str, tags_legacy_str, level,
