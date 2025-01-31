@@ -66,6 +66,7 @@ def evaluate_question(data, question):
 
                                     Also determine if the complaint is forwarded to an employee or to the FAQ, if a person explicitly states they want human assistance forward them to an employee.
                                     As of now this FAQ does not exist, so just ask yourself if the stated problem should be covered in an faq and commense from there :)
+                                    Keep in mind forward to an employee is costly as a ticket gets opened, so only forward them to an employee if you are absolutely sure they need advanced assistance.
 
                                     ONLY RETURN A JSON FILE IN THE CORRECT FORMAT OF:
 
