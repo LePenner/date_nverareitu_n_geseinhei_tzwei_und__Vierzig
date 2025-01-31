@@ -9,38 +9,40 @@ class Console():
 
     # please edit spinner speed from main.py
     spinner_speed = 0
-    #spinner = ['/', '-', '\\', '|']
-
+    spinner = ['/', '-', '\\', '|']
     # spinners at https://github.com/manrajgrover/py-spinners/blob/master/spinners/spinners.py
     # alt spinners:
-
     # spinner = [".", "o", "O", "o"]
     # spinner = ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█", "▇", "▆", "▅", "▄", "▃", "▂", "▁"]
-    spinner = ["o", " o", "  o", "   o", "    o", "     o", "      o", "       o"]
+    # spinner = ["o", " o", "  o", "   o", "    o", "     o", "      o", "       o"]
     # spinner = ["⠁", "⠉", "⠒", "⠤", "⠦", "⠴", "⠶", "⠷", "⠿"]
     # spinner = ["⊶", "⊷"]
     # spinner = ["■", "□"]
 
+    # holds width of widest spinner part
     spinner_width = 0
     for fin in spinner:
         if len(fin) > spinner_width:
             spinner_width = len(fin)
 
+    # delete old log
     try:
         os.remove("log.txt")
     except:
         pass
 
-    def init():
+    # display default state
+    def default():
         print(' >>>', end='\r')
 
+    # clears console to remove artifacts
     def clear():
         if os.name == 'nt':
             os.system('cls')
-            Console.init()
+            Console.default()
         elif os.name == 'posix':
             os.system('clear')
-            Console.init()
+            Console.default()
 
     # when a function is called the spinner indicates execution of code
     # also clears console on execution
@@ -51,6 +53,8 @@ class Console():
         print(f'\033[5C{spinner[0]}', end='\r')
         return spinner[0]
 
+    # prints a status next to the spinner for one frame
+    # and logs status
     def status(text, spin=True):
 
         if spin == True:
@@ -58,6 +62,8 @@ class Console():
         print(f'\033[{6+Console.spinner_width}C{text}', end='\r')
         Console.log(text)
 
+    # logs to log.txt
     def log(text):
         with open("log.txt", "a") as f:
-            print(f"[{dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] {text}", file=f)
+            print(f"[{dt.datetime.now().strftime(
+                '%Y-%m-%d %H:%M:%S')}] {text}", file=f)

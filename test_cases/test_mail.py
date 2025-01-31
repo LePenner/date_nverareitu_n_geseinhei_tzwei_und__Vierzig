@@ -11,7 +11,7 @@ from googleapiclient.discovery import build
 from modules.console import Console
 
 
-def test_mail():
+def test_mail(email, text):
     CREDENTIALS_JSON = "modules/functionals/credentials.json"
     TOKEN_JSON = "modules/functionals/token.json"
     TAGS_JSON = "modules/functionals/tags.json"
@@ -45,19 +45,17 @@ def test_mail():
     except Exception as e:
         Console.log(f'Test failed {e}')
 
-    email = "erikblunk42@gmail.com"
-    complaint = "ich complaine"
-
     data = {
         'mail': {'subject': 'Test',
                  'sender': 'Test',
-                 'body': 'Hi, my vacuum robot isnt charging anymore, I already red the faq and didnt find a solution, what can I do'
+                 'body': text
                  },
         'thread_id': "",
         'email': email,
-        'name': 'Erik Blunk',
+        'name': 'John Doe',
         'service': SERVICE,
-        'paths': PATHS
+        'paths': PATHS,
+        'message_id': ""
     }
 
     Bot.input(data)

@@ -2,14 +2,24 @@ import base64
 
 from email.message import EmailMessage
 from googleapiclient.errors import HttpError
-import mimetypes
 
+# own imports
 from modules.console import Console
 
+def mark_as_read(SERVICE, message_id):
 
-#########################################################
-# PLEASE LOG IN WITH bugland.botbob@gmail.com !!!!!!!!! #
-#########################################################
+    try:
+        # mark message as read
+        SERVICE.users().messages().modify(
+            userId="me",
+            body={"removeLabelIds": ["UNREAD"]}
+        ).execute()
+
+        Console.status(
+            f"Message {message_id} marked as read")
+
+    except Exception as e:
+        Console.status(f"Failed to mark message as read: {e}")
 
 
 def send_mail(data, content):
@@ -42,7 +52,7 @@ def send_mail(data, content):
 
         Console.status(f'Message sent. Id: {send_message["id"]} Thread Id: {
                        send_message['threadId']}')
-        
+
     except HttpError as error:
         Console.status(f"An error occurred: {error}")
         send_message = None

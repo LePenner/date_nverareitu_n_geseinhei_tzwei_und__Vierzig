@@ -3,8 +3,8 @@ import string
 
 # own imports
 from modules.console import Console
-from modules.functionals.sending_messages import send_mail
 from modules.ai import ai_answer
+from modules.messages import mark_as_read, send_mail
 
 
 class Bot():
@@ -62,7 +62,15 @@ class Bot():
         return q_tags
 
     def answer(data, question):
-        send_mail(data, ai_answer(data, question))
+
+        response = ai_answer(data, question)
+
+        # handle error ai quota reached
+        if response == 1:
+            Console.status('no message sent')
+        else:
+            mark_as_read(data['service'], data['message_id'])
+            send_mail(data, response)
 
     def log_tags(tags):
         pass

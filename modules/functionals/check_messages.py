@@ -20,7 +20,9 @@ def check_mails(SERVICE, PATHS):
         else:
             Console.status(f"{len(messages)} new mails")
 
-            for message in messages:
+            for indx, message in enumerate(messages, start=1):
+
+                Console.status(f'processing message {indx}/{len(messages)}')
 
                 # get full message (other is just id)
                 message = SERVICE.users().messages().get(
@@ -56,19 +58,6 @@ def check_mails(SERVICE, PATHS):
                         Console.status(f"Failed to read message: {e}")
                         break
 
-                try:
-                    # mark message as read
-                    SERVICE.users().messages().modify(
-                        userId="me",
-                        id=message.get('id'),
-                        body={"removeLabelIds": ["UNREAD"]}
-                    ).execute()
-
-                    Console.status(f"Message {message.get('id')} marked as read")
-
-                except Exception as e:
-                    Console.status(f"Failed to mark message as read: {e}")
-
                 # seperate email from sender
                 if "<" in sender:
                     email = sender.split("<")[1].strip(">")
@@ -86,8 +75,11 @@ def check_mails(SERVICE, PATHS):
                     'email': email,
                     'name': name,
                     'service': SERVICE,
-                    'paths': PATHS
+                    'paths': PATHS,
+                    'message_id': message.get('id')
                 }
+
+                Console.log(f'{message.get('id')}, {data['message_id']}')
 
                 if data:
 

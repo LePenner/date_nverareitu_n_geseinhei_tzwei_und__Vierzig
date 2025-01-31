@@ -16,42 +16,48 @@ def get_model_response(PATHS, promt):
         creds = json.load(json_file)
 
     # initiate AI and return response
-    genai.configure(api_key=creds["GenAiApiKey"])
-    return genai.GenerativeModel("gemini-1.5-flash").generate_content(promt)
+    try:
+        genai.configure(api_key=creds["GenAiApiKey"])
+        return genai.GenerativeModel("gemini-1.5-flash").generate_content(promt)
+    except Exception as e:
+        Console.status(f'no response generated, error: {e}')
 
 # determinse handling of question
 
 
 def ai_answer(data, question):
 
-    # returns tags and how to proceed with request, cut jason```[ actual data ]```
-    evaluation = evaluate_question(
-        data, question).text[7:-4]
+    # returns tags and how to proceed with request
+    # cut jason```[ actual data ]```
+    # interpret as dictionary with json.loads
+    try:
+        evaluation = json.loads(evaluate_question(
+            data, question).text[7:-4])
 
-    # eval_structure = json.loads(evaluation.text.split("```")[1].split("json")[1])
-    Console.log(evaluation)
+        # check if forwarded to staff or faq
+        if evaluation['continue'] == 'employee':
 
-    evaluation = json.loads(evaluation)
+            ticket_id = str(uuid.uuid4())
+            email = data['email']
+            answer = forward_to_employee(data, question, ticket_id)
 
-    # check if forwarded to staff or faq
-    if evaluation['continue'] != 'faq':
+            # create ticket
+            try:
+                ticket_instance = Ticket_db()
+                ticket_instance.create_ticket(
+                    ticket_id, email, question, answer, evaluation, data)
+            except Exception as e:
+                Console.status(f'Ticket Creation failed: {e}')
 
-        ticket_id = str(uuid.uuid4())
-        email = data['email']
-        answer = forward_to_employee(data, question, ticket_id)
+        elif evaluation['continue'] == 'faq':
+            answer = faq(data, question)
+        else:
+            answer = misc(data, question)
 
-        # create ticket
-        try:
-            ticket_instance = Ticket_db()
-            ticket_instance.create_ticket(
-                ticket_id, email, question, answer, evaluation, data)
-
-        except Exception as e:
-            Console.status(f'Ticket Creation failed: {e}')
-    else:
-        answer = faq(data, question)
-
-    return answer
+        Console.log("complaint processed")
+        return answer
+    except:
+        return 1
 
 
 def evaluate_question(data, question):
@@ -64,7 +70,7 @@ def evaluate_question(data, question):
 
                                     For the complaint: {question}, distil the individual products our customer is experiencing issues with and the issues themselves.
 
-                                    Also determine if the complaint is forwarded to an employee or to the FAQ, if a person explicitly states they want human assistance forward them to an employee.
+                                    Also determine if the complaint is forwarded to an employee, to the FAQ or misc (eg. spam or no problems provided).
                                     As of now this FAQ does not exist, so just ask yourself if the stated problem should be covered in an faq and commense from there :)
                                     Keep in mind forward to an employee is costly as a ticket gets opened, so only forward them to an employee if you are absolutely sure they need advanced assistance.
 
@@ -76,18 +82,15 @@ def evaluate_question(data, question):
                                         “product”: -product name goes here-,
                                         “problem”: [-problem1-, -problem2, …]
                                         }},
-                                        “continue”: -either “faq” or “employee-”
+                                        “continue”: -either “faq”, “employee" or "misc”-
                                     }}
                                     """
                                     )
-    Console.log("generated response")
+    Console.status("evaluated problem")
     return evaluation
 
 
 def faq(data, question):
-
-    name = data['name']
-
     ai_text = get_model_response(data['paths'],
                                  f"""
                                 You are managing the support request for a firm called BUGLAND Ltd.
@@ -97,7 +100,7 @@ def faq(data, question):
 
                                 For this customer question/complaint: {question},
                                 please Generate a polite Email text, starting with the greeting (no subject) following roughly this structure (this shall only serve as a guide, you are not bound to exactly replicate the structure, but it should have the same effective use):
-                                Dear {name},
+                                Dear {data['name']},
 
                                 Regarding [summary of complaint here]
 
@@ -108,16 +111,11 @@ def faq(data, question):
                                 The BUGLAND Support Team
                                 """
                                  )
-
-    Console.log(ai_text.text)
-
+    Console.status("refer to faq")
     return ai_text.text
 
 
 def forward_to_employee(data, question, ticket_id):
-
-    name = data['name']
-
     ai_text = get_model_response(data['paths'],
                                  f"""
         You are managing the support request for a firm called BUGLAND Ltd.
@@ -128,7 +126,7 @@ def forward_to_employee(data, question, ticket_id):
         For this customer question/complaint: {question},
         please Generate a polite Email text, starting with the greeting (no subject) following roughly this structure (this shall only serve as a guide, you are not bound to exactly replicate the structure, but it should have the same effective use):
 
-        Dear {name},
+        Dear {data['name']},
 
         Regarding [summary of complaint here]
 
@@ -138,7 +136,28 @@ def forward_to_employee(data, question, ticket_id):
         In best regards,
         The BUGLAND Support Team
         """)
+    Console.status('forward to employee')
+    return ai_text.text
 
-    Console.log(ai_text.text)
 
+def misc(data, question):
+    ai_text = get_model_response(data['paths'],
+                                 f"""
+        You are managing the support request for a firm called BUGLAND Ltd.
+        Our Products are the Windowfly, a window cleaning robot,
+        the Cleanbug, a vacuum mop robot
+        and the Gardenbeetle, a lawnmower and weed killer robot.
+
+        For this customer question/complaint: {question},
+        please Generate a polite Email text, starting with the greeting (no subject) following roughly this structure (this shall only serve as a guide, you are not bound to exactly replicate the structure, but it should have the same effective use):
+
+        Dear {data['name']},
+
+        Sadly we were unable to adress your complaint, because information about [product and/or problems] was missing,
+        we ask you to restate your problem.
+
+        In best regards,
+        The BUGLAND Support Team
+        """)
+    Console.status('misc')
     return ai_text.text

@@ -12,6 +12,11 @@ from modules.functionals.check_messages import check_mails
 from modules.console import Console
 
 
+#########################################################
+# PLEASE LOG IN WITH bugland.botbob@gmail.com !!!!!!!!! #
+#########################################################
+
+
 def main():
 
     # ready console for pretty output
@@ -46,30 +51,37 @@ def main():
 
     try:
         SERVICE = build("gmail", "v1", credentials=creds)
-        PATHS = {'credentials': CREDENTIALS_JSON,
-                 'token': TOKEN_JSON,
-                 'tags': TAGS_JSON}
-
-        poll_rate = 10  # polling rate in seconds - use more or eaqual to 10 to stay in monthly 2 mil call limit - absolute limit: 1
-        spinner_speed = 8  # 4 equals one rotation a second
-        Console.spinner_speed = spinner_speed*poll_rate/10
-
-        count = poll_rate * Console.spinner_speed  # start count on max to ease debuging
-
-        while True:
-
-            # every 10 seconds the count reaches max
-            if count >= poll_rate * Console.spinner_speed:
-                check_mails(SERVICE, PATHS)
-                count = 0
-
-            time.sleep(poll_rate / Console.spinner_speed / 10)
-            Console.spinner_spin()
-
-            count += 1
-
     except HttpError as error:
         Console.status(f"Error while building service: {error}")
+
+    PATHS = {'credentials': CREDENTIALS_JSON,
+             'token': TOKEN_JSON,
+             'tags': TAGS_JSON}
+
+    # polling rate in seconds
+    poll_rate = 10
+    # use more or eaqual to 10 to stay in monthly 2 mil call limit
+    # absolute limit: 1
+
+    spinner_speed = 8
+
+    # keep spinner speed constant at different poll rates
+    Console.spinner_speed = spinner_speed*poll_rate/10
+
+    # set count to max at startup, to process all backups immediately
+    count = poll_rate * Console.spinner_speed
+
+    # main loop
+    while True:
+
+        if count >= poll_rate * Console.spinner_speed:
+            check_mails(SERVICE, PATHS)
+            count = 0
+
+        time.sleep(poll_rate / Console.spinner_speed / 10)
+        Console.spinner_spin()
+
+        count += 1
 
 
 if __name__ == "__main__":
