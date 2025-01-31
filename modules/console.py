@@ -37,12 +37,9 @@ class Console():
 
     # clears console to remove artifacts
     def clear():
-        if os.name == 'nt':
-            os.system('cls')
-            Console.default()
-        elif os.name == 'posix':
-            os.system('clear')
-            Console.default()
+
+        print(f'\033[H >>>\033[{
+              Console.spinner_width+2}C\033[J\033[K', end='\r')
 
     # when a function is called the spinner indicates execution of code
     # also clears console on execution
