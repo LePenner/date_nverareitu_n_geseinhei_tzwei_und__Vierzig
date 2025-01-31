@@ -6,6 +6,7 @@ from googleapiclient.errors import HttpError
 # own imports
 from modules.console import Console
 
+
 def mark_as_read(SERVICE, message_id):
 
     try:
@@ -52,6 +53,7 @@ def send_mail(data, content):
 
         Console.status(f'Message sent. Id: {send_message["id"]} Thread Id: {
                        send_message['threadId']}')
+        Console.status('Request Handled')
 
     except HttpError as error:
         Console.status(f"An error occurred: {error}")

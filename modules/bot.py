@@ -17,7 +17,6 @@ class Bot():
         tags = Bot.check_tags(data['paths'], user_question)
         Console.status(f'tags generated: {tags}')
         Bot.answer(data, user_question)
-        Console.status('Request Handled')
 
     def check_tags(PATHS, question):
 

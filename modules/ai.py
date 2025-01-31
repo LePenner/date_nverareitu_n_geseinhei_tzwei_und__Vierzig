@@ -33,6 +33,7 @@ def ai_answer(data, question):
     try:
         evaluation = json.loads(evaluate_question(
             data, question).text[7:-4])
+        Console.status("evaluated problem")
 
         # check if forwarded to staff or faq
         if evaluation['continue'] == 'employee':
@@ -86,7 +87,6 @@ def evaluate_question(data, question):
                                     }}
                                     """
                                     )
-    Console.status("evaluated problem")
     return evaluation
 
 
