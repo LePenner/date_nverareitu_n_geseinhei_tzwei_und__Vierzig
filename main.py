@@ -1,5 +1,6 @@
 import os
 import time
+import atexit
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -83,6 +84,12 @@ def main():
 
         count += 1
 
+
+def at_exit():
+    os.system('log.txt')
+
+
+atexit.register(at_exit)
 
 if __name__ == "__main__":
     main()
