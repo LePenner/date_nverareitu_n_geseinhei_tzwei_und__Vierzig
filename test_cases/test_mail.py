@@ -51,7 +51,7 @@ def test_mail():
     data = {
         'mail': {'subject': 'Test',
                  'sender': 'Test',
-                 'body': 'Hi I need help with my window fly, its not getting off the window!'
+                 'body': 'Hi, my vacuum robot isnt charging anymore, I already red the faq and didnt find a solution, what can I do'
                  },
         'thread_id': "",
         'email': email,

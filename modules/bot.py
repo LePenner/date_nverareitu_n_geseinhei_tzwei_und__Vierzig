@@ -4,7 +4,7 @@ import string
 # own imports
 from modules.console import Console
 from modules.functionals.sending_messages import send_mail
-from modules.customer_complaint_processing import ai_text_answer
+from modules.ai import ai_answer
 
 
 class Bot():
@@ -62,8 +62,7 @@ class Bot():
         return q_tags
 
     def answer(data, question):
-        # return_response = complaintPorcessing(question)
-        send_mail(data, ai_text_answer(data, question))
+        send_mail(data, ai_answer(data, question))
 
     def log_tags(tags):
         pass
