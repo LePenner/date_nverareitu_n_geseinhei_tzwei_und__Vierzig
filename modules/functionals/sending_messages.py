@@ -19,7 +19,6 @@ def send_mail(data, content):
     thread_id = data['thread_id']
     SERVICE = data['service']
 
-
     try:
         message = EmailMessage()
 
@@ -28,9 +27,6 @@ def send_mail(data, content):
         message["To"] = adress
         message["From"] = "bugland.botbob@gmail.com"
         message["Subject"] = subject
-        message['References'] = thread_id
-        message['In-Reply-To'] = thread_id
-
 
         encoded_message = base64.urlsafe_b64encode(message.as_bytes()).decode()
 
@@ -43,7 +39,10 @@ def send_mail(data, content):
             .send(userId="me", body=create_message)
             .execute()
         )
-        Console.status(f'Message sent. Id: {send_message["id"]} Thread Id: {send_message['threadId']}')
+
+        Console.status(f'Message sent. Id: {send_message["id"]} Thread Id: {
+                       send_message['threadId']}')
+        
     except HttpError as error:
         Console.status(f"An error occurred: {error}")
         send_message = None
