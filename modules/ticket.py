@@ -62,7 +62,8 @@ class Ticket_db():
                 tags_ai_str = ','.join(tags_ai)
                 Console.log("l60")
                 sql_data = (ticket_id, thread_id, name, customer_mail, complaint, history_str, tags_ai_str, tags_legacy_str, level, extra_bin)
-                Console.log("received sql_data:\n" + sql_data)
+                Console.log("received sql_data:")
+                Console.log(sql_data)
 
                 self.cur.execute(
                     "INSERT INTO tickets (ticket_id, thread_id, name, customer_mail, complaint, history, tags_ai, tags_legacy, level, extra_bin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -70,6 +71,7 @@ class Ticket_db():
                 self.con.commit()
                 Console.log("added to db")
         except Exception as e:
+            Console.log("no ai tags recognised: " + e)
             tags_ai_str = "none"
             sql_data = (
             ticket_id, thread_id, name, customer_mail, complaint, history_str, tags_ai_str, tags_legacy_str, level,
