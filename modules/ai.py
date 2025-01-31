@@ -65,6 +65,7 @@ def evaluate_question(data, question):
                                     For the complaint: {question}, distil the individual products our customer is experiencing issues with and the issues themselves.
 
                                     Also determine if the complaint is forwarded to an employee or to the FAQ, if a person explicitly states they want human assistance forward them to an employee.
+                                    As of now this FAQ does not exist, so just ask yourself if the stated problem should be covered in an faq and commense from there :)
 
                                     ONLY RETURN A JSON FILE IN THE CORRECT FORMAT OF:
 
@@ -94,7 +95,7 @@ def faq(data, question):
                                 and the Gardenbeetle, a lawnmower and weed killer robot.
 
                                 For this customer question/complaint: {question},
-                                please Generate a polite Email following roughly this structure (this shall only serve as a guide, you are not bound to exactly replicate the structure, but it should have the same effective use):
+                                please Generate a polite Email text, starting with the greeting (no subject) following roughly this structure (this shall only serve as a guide, you are not bound to exactly replicate the structure, but it should have the same effective use):
                                 Dear {name},
 
                                 Regarding [summary of complaint here]
