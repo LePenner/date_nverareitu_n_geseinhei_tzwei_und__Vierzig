@@ -61,13 +61,14 @@ class Bot():
 
     def answer(data, question):
 
-        from modules.messages import mark_as_read, send_mail  # to avoid circular imports
+        # to avoid circular imports
+        from modules.messages import mark_as_read, send_mail
 
         response = ai_answer(data, question)
 
         # handle error ai quota reached
         if response == 1:
-            Console.status('no message sent')
+            Console.status('response creation failed, no message sent')
         else:
             mark_as_read(data['service'], data['message_id'])
             send_mail(data, response)

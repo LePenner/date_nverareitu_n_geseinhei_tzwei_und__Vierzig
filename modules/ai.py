@@ -27,10 +27,10 @@ def get_model_response(PATHS, promt):
 
 def ai_answer(data, question):
 
-    # returns tags and how to proceed with request
-    # cut jason```[ actual data ]```
-    # interpret as dictionary with json.loads
     try:
+        # returns tags and how to proceed with request
+        # cut json```[ actual data ]```
+        # interpret as dictionary with json.loads
         evaluation = json.loads(evaluate_question(
             data, question).text[7:-4])
         Console.status("evaluated problem")

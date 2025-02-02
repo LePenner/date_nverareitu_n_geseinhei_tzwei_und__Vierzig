@@ -21,7 +21,6 @@ from modules.console import Console
 def main():
 
     # ready console for pretty output
-
     if os.name == 'nt':
         os.system('cls')
         Console.default()
