@@ -9,7 +9,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 # own imports
-from modules.functionals.check_messages import check_mails
+from modules.messages import check_mails
 from modules.console import Console
 
 

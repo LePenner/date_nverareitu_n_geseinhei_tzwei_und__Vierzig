@@ -73,7 +73,8 @@ def evaluate_question(data, question):
 
                                     Also determine if the complaint is forwarded to an employee, to the FAQ or misc (eg. spam or no problems provided).
                                     As of now this FAQ does not exist, so just ask yourself if the stated problem should be covered in an faq and commense from there :)
-                                    Keep in mind forward to an employee is costly as a ticket gets opened, so only forward them to an employee if you are absolutely sure they need advanced assistance.
+                                    Keep in mind forwarding to an employee is costly as a ticket gets opened, so only forward them to an employee if you are absolutely sure they need advanced assistance.
+                                    Dont forward them unless the problems and the products these problems concern are clearly stated and these may not be solved via faq!
 
                                     ONLY RETURN A JSON FILE IN THE CORRECT FORMAT OF:
 

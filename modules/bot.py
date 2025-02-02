@@ -4,7 +4,6 @@ import string
 # own imports
 from modules.console import Console
 from modules.ai import ai_answer
-from modules.messages import mark_as_read, send_mail
 
 
 class Bot():
@@ -61,6 +60,8 @@ class Bot():
         return q_tags
 
     def answer(data, question):
+
+        from modules.messages import mark_as_read, send_mail  # to avoid circular imports
 
         response = ai_answer(data, question)
 
