@@ -39,6 +39,7 @@
         },
         {
             "window cleaner robot": [
+                "windowfly",
                 "window",
                 "windows",
                 "glass",
@@ -52,6 +53,8 @@
         },
         {
             "vaccum robot": [
+                "cleanbug",
+                "clean bug",
                 "vaccum",
                 "vacuum",
                 "vacume",
@@ -71,6 +74,14 @@
                 "suction power",
                 "brush",
                 "wheels"
+            ]
+        },
+        {
+            "lawnmower robot": [
+                "gardenbeatle",
+                "garden beatle",
+                "lawn",
+                "mower"
             ]
         },
         {
