@@ -69,7 +69,7 @@ def check_mails(SERVICE, PATHS):
                 else:
                     email = sender
 
-                name = message.get['from']
+                name = sender.split("<")[0]
 
                 # format needed data
                 data = {
@@ -103,7 +103,8 @@ def mark_as_read(SERVICE, message_id):
         # mark message as read
         SERVICE.users().messages().modify(
             userId="me",
-            body={"removeLabelIds": ["UNREAD"]}
+            body={"removeLabelIds": ["UNREAD"]},
+            id=message_id
         ).execute()
 
         Console.status(
