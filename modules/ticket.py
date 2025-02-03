@@ -17,7 +17,7 @@ class Ticket_db():
                 complaint TEXT,
                 history TEXT,
                 tags_ai BLOB,
-                tags_legacy BLOB,
+                tags_legacy TEXT,
                 level INTEGER,
                 extra_bin TEXT
             )""")
@@ -28,7 +28,7 @@ class Ticket_db():
         thread_id = data["thread_id"]
         name = data["name"]
 
-        tags_legacy = []
+        tags_legacy = ""
         history_str = AIResponse
         tags_legacy_str = tags_legacy
         extra_bin = ''
