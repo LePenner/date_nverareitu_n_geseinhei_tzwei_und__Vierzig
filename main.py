@@ -23,10 +23,8 @@ def main():
     # ready console for pretty output
     if os.name == 'nt':
         os.system('cls')
-        Console.default()
     elif os.name == 'posix':
         os.system('clear')
-        Console.default()
 
     # det path
     os.chdir(os.path.dirname(os.path.realpath(__file__)))
