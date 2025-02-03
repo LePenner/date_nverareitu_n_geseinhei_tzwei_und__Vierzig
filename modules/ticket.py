@@ -24,14 +24,12 @@ class Ticket_db():
         self.con.commit()
         Console.log("connected to db")
 
-    def create_ticket(self, ticket_id, customer_mail, complaint, AIResponse, ai_details, data, ):
+    def create_ticket(self, ticket_id, customer_mail, complaint, AIResponse, ai_details, data, legacy_tags):
         thread_id = data["thread_id"]
         name = data["name"]
-
-        tags_legacy = ""
         ai_details = str(ai_details)
         history_str = AIResponse
-        tags_legacy_str = tags_legacy
+        tags_legacy_str = str(legacy_tags)
         extra_bin = ''
         level = 2
 

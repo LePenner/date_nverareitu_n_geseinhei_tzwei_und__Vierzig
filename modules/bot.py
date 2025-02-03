@@ -15,7 +15,7 @@ class Bot():
         # not in use currently
         tags = Bot.check_tags(data['paths'], user_question)
         Console.status(f'tags generated: {tags}')
-        Bot.answer(data, user_question)
+        Bot.answer(data, user_question, tags)
 
     def check_tags(PATHS, question):
 
@@ -59,12 +59,12 @@ class Bot():
 
         return q_tags
 
-    def answer(data, question):
+    def answer(data, question, legacy_tags):
 
         # to avoid circular imports
         from modules.messages import mark_as_read, send_mail
 
-        response = ai_answer(data, question)
+        response = ai_answer(data, question, legacy_tags)
 
         # handle error ai quota reached
         if response == 1:

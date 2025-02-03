@@ -25,7 +25,7 @@ def get_model_response(PATHS, promt):
 # determinse handling of question
 
 
-def ai_answer(data, question):
+def ai_answer(data, question, legacy_tags):
 
     try:
         # returns tags and how to proceed with request
@@ -46,7 +46,7 @@ def ai_answer(data, question):
             try:
                 ticket_instance = Ticket_db()
                 ticket_instance.create_ticket(
-                    ticket_id, email, question, answer, evaluation, data)
+                    ticket_id, email, question, answer, evaluation, data, legacy_tags)
             except Exception as e:
                 Console.status(f'Ticket Creation failed: {e}')
 
