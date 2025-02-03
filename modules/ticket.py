@@ -16,7 +16,7 @@ class Ticket_db():
                 customer_mail VARCHAR(255),
                 complaint TEXT,
                 history TEXT,
-                tags_ai BLOB,
+                tags_ai TEXT,
                 tags_legacy TEXT,
                 level INTEGER,
                 extra_bin TEXT
@@ -29,14 +29,16 @@ class Ticket_db():
         name = data["name"]
 
         tags_legacy = ""
+        ai_details = str(ai_details)
         history_str = AIResponse
         tags_legacy_str = tags_legacy
         extra_bin = ''
         level = 2
 
         try:
-            sql_data = (ticket_id, thread_id, name, customer_mail, complaint,
-                        history_str, ai_details, tags_legacy_str, level, extra_bin)
+            sql_data = (
+                ticket_id, thread_id, name, customer_mail, complaint, history_str, ai_details, tags_legacy_str, level,
+                extra_bin)
 
             self.cur.execute(
                 "INSERT INTO tickets (ticket_id, thread_id, name, customer_mail, complaint, history, tags_ai, tags_legacy, level, extra_bin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -44,6 +46,7 @@ class Ticket_db():
             self.con.commit()
             Console.log("added to db")
         except Exception as e:
+            Console.log(e)
             tags_ai_str = "none"
             sql_data = (
                 ticket_id, thread_id, name, customer_mail, complaint, history_str, tags_ai_str, tags_legacy_str, level,
