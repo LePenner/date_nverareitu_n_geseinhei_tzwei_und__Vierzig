@@ -1,10 +1,7 @@
 import os
 import datetime as dt
-import platform
 
 # class to display spinner and a status, log any displayed messages
-
-
 class Console():
 
     # please edit spinner speed from main.py
@@ -31,15 +28,11 @@ class Console():
     except:
         pass
 
-    # display default state
-    def default():
-        print(' >>>', end='\r')
-
     # clears console to remove artifacts
     def clear():
 
-        print(f'\033[H >>>\033[{
-              Console.spinner_width+2}C\033[J\033[K', end='\r')
+        print(f'\033[H >>> \033[{
+              Console.spinner_width}C \033[J\033[K', end='\r')
 
     # when a function is called the spinner indicates execution of code
     # also clears console on execution
